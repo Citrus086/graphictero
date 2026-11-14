@@ -1,0 +1,7 @@
+[
+  { "key": "P01", "title": "Attention Is All You Need", "arxiv": "1706.03762", "year": 2017 },
+  { "key": "P02", "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding", "arxiv": "1810.04805", "year": 2018 },
+  { "key": "P03", "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "arxiv": "2005.11401", "year": 2020 },
+  { "key": "P04", "title": "ReAct: Synergizing Reasoning and Acting in Language Models", "arxiv": "2210.03629", "year": 2022 },
+  { "key": "P05", "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection", "arxiv": "2310.11511", "year": 2023 }
+]

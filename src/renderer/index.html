@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 评审建 9：渲染进程 CSP。connect-src 的 dev 白名单（HMR websocket / vite dev
+         server）由 electron.vite.config.ts 的 cspDevPlugin 只在 dev 注入；构建产物
+         的 connect-src 只有 'self'（终审建议修 3：最小权限）。
+         lane/pdf 第三批：script-src 加 'wasm-unsafe-eval' —— D27 阅读器的 EmbedPDF
+         引擎（PDFium wasm）需要在渲染进程编译 WebAssembly；不加会被 CSP 拒绝
+         （Chromium 要求显式白名单，不影响其余 script 限制）。
+         lane/pdf 第五批：img-src 加 blob: —— RenderLayer 的页面位图是 blob: URL，
+         缺了整页白屏（只看得见透明文本层与高亮），smoke 截图发现。
+         M4 render 合并批（D115）：img-src 加 gt-asset: —— 详情页本地图片专用协议
+         （主进程 realpath 校验在数据目录内），取代 file:// 直读。
+         M5 前置（D116）：页面改经 gt-app:// 加载后，这里的 'self' 指 gt-app://app
+         自身——file:// 不再是同源，D115 的残留暴露面（file 页面下 CSP 'self' 覆盖
+         本地 file:// 资源）关闭；指令本身不变，仍不放行 file:/https: -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: gt-asset:; font-src 'self' data:; connect-src 'self'%CSP_DEV_CONNECT%"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graphictero</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- lane/render：PartsView 冒烟挂载入口（仅 ?smoke=1 时暴露 window.__gtSmokeParts，正常无行为） -->
+    <script type="module" src="/src/components/richtext/smokeEntry.ts"></script>
+  </body>
+</html>

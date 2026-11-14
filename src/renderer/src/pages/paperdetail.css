@@ -1,0 +1,247 @@
+/* M4 lane/detail：论文详情页样式（03 系列；只在本文件加类，不动 styles.css）。
+
+   顶栏红绿灯占位（批 5，用户报的必修 bug）已随 lane/detail 合并提升为
+   styles.css 共享类 `.tlinset`（数值来源见彼处注释），本文件不再定义。 */
+
+.gt-pd-page {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 28px 40px;
+}
+
+.gt-pd-col {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 头部元数据（原型 .dmeta） */
+.gt-pd-title {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+}
+
+.gt-pd-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text2);
+}
+.gt-pd-meta .s {
+  color: var(--text3);
+}
+
+/* dbar（原型 .dbar） */
+.gt-pd-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* 过期提示条（原型 .stale）；uat5 D170：灰色小字 + 「重新生成」，不用警告样式 */
+.gt-pd-stale {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--canvas);
+  border: 1px solid var(--line2);
+  font-size: 12px;
+  color: var(--text3);
+}
+.gt-pd-stale .grow {
+  color: var(--text2);
+}
+
+.gt-pd-linkbtn {
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.gt-pd-linkbtn:hover {
+  text-decoration: underline;
+}
+
+/* 摘要块（原型 .abs / 03g） */
+.gt-pd-abs {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--side, transparent);
+}
+.gt-pd-absh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  margin-bottom: 6px;
+}
+.gt-pd-aitag {
+  /* uat2 建议修 3：偏好克制的灰阶 UI（原型即灰色小字，非蓝徽章） */
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--text3);
+  border: 1px solid var(--line2);
+  border-radius: 4px;
+  padding: 0 5px;
+  line-height: 16px;
+}
+.gt-pd-abt {
+  font-size: 13px;
+  line-height: 21px;
+  color: var(--text);
+  white-space: normal;
+}
+.gt-pd-abt p {
+  margin: 0;
+}
+.gt-pd-chat-on {
+  background: var(--hover2);
+  color: var(--text2);
+}
+
+/* 03b / 03h / 03d 任务视图（原型 .tsteps 区） */
+.gt-pd-taskbox {
+  margin: 40px auto 0;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.gt-pd-tasktitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+.gt-pd-faildot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  flex: none;
+}
+
+.gt-pd-steps {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.gt-pd-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  border-bottom: 1px solid var(--line);
+}
+.gt-pd-step:last-child {
+  border-bottom: none;
+}
+.gt-pd-step .grow {
+  color: var(--text);
+}
+.gt-pd-steptxt {
+  font-size: 11.5px;
+  color: var(--text3);
+}
+.gt-pd-step.done .gt-pd-steptxt {
+  color: var(--text2);
+}
+.gt-pd-step.active .gt-pd-steptxt {
+  color: var(--accent);
+}
+.gt-pd-step.failed .grow,
+.gt-pd-step.failed .gt-pd-steptxt {
+  color: var(--danger);
+}
+.gt-pd-stepic {
+  width: 16px;
+  display: inline-flex;
+  justify-content: center;
+  color: var(--text2);
+}
+.gt-pd-step.failed .gt-pd-stepic {
+  color: var(--danger);
+}
+.gt-pd-step.active .gt-pd-stepic {
+  color: var(--accent);
+}
+.gt-pd-spin {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: gt-pd-pulse 1s ease-in-out infinite;
+}
+@keyframes gt-pd-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* 03e 简版（D111） */
+.gt-pd-kv {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  font-size: 12.5px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.gt-pd-kv > span:nth-child(odd) {
+  color: var(--text3);
+}
+.gt-pd-kv > span:nth-child(even) {
+  color: var(--text);
+}
+
+.gt-pd-dropz {
+  position: relative;
+  border: 1.5px dashed var(--line2);
+  border-radius: 10px;
+  padding: 26px 16px 20px;
+  text-align: center;
+  color: var(--text3);
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.gt-pd-soon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 10.5px;
+  color: var(--text3);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 5px;
+  line-height: 16px;
+}
+
+.gt-pd-tried {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text3);
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}

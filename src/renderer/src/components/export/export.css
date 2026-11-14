@@ -1,0 +1,146 @@
+/* M6 lane/ui 批 2：导出 Markdown 弹窗（原型 08 口径；样式只进本文件，不改 styles.css） */
+
+.gt-exp-ov {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+.gt-exp-modal {
+  width: 880px;
+  height: 600px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 48px);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.gt-exp-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 20px 6px;
+}
+.gt-exp-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  border-top: 1px solid var(--line);
+}
+.gt-exp-opts {
+  width: 290px;
+  flex: none;
+  padding: 12px 20px 14px;
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+}
+.gt-exp-xh {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text2);
+  margin: 14px 0 8px;
+}
+.gt-exp-opts .gt-exp-xh:first-child {
+  margin-top: 2px;
+}
+.gt-exp-ol {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5px 0;
+  cursor: pointer;
+  font-size: 12.5px;
+}
+.gt-exp-ol input[type='checkbox'] {
+  display: none;
+}
+.gt-exp-cb {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  margin-top: 1px;
+  border: 1px solid var(--line2);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  background: var(--field);
+}
+.gt-exp-ol input:checked + .gt-exp-cb,
+.gt-exp-xt.on .gt-exp-cb {
+  border-color: var(--accent);
+}
+.gt-exp-olt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.gt-exp-olt .t3 {
+  font-size: 11.5px;
+  line-height: 16px;
+}
+.gt-exp-cost {
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 400;
+}
+.gt-exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.gt-exp-xt {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+}
+.gt-exp-xt.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.gt-exp-preview {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.gt-exp-pre {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--field);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.gt-exp-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--line);
+}

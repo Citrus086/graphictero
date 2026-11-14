@@ -1,0 +1,55 @@
+name: Bug 报告 / Bug report
+description: 报告一个问题 / Report something that doesn't work
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请不要贴 API Key、论文全文或其他隐私内容。
+        Thanks for reporting! Please don't paste API keys, paper full text or other private data.
+  - type: input
+    id: app-version
+    attributes:
+      label: 应用版本 / App version
+      description: 在 Finder 中对 Graphictero.app「显示简介」可以看到 / Finder → Get Info on Graphictero.app
+      placeholder: "0.0.1"
+    validations:
+      required: true
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS 版本 / macOS version
+      description: 例如 macOS 15.1，以及芯片型号（如 M2）/ e.g. macOS 15.1, chip (e.g. M2)
+      placeholder: "macOS 15.1, M2"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤 / Steps to reproduce
+      placeholder: |
+        1. 打开 … / Open …
+        2. 点击 … / Click …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果 / Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果 / Actual behavior
+      description: 有报错信息或截图可以一起贴上 / Include error messages or screenshots if any
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其他信息 / Additional context
+      description: 例如相关日志（如 <数据目录>/logs/mineru-sidecar.log，请先去掉隐私内容）/ e.g. relevant logs, with private data removed
+    validations:
+      required: false

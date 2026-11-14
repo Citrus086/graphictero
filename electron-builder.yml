@@ -1,0 +1,26 @@
+appId: com.citrus086.graphictero
+productName: Graphictero
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**
+  - package.json
+mac:
+  category: public.app-category.productivity
+  icon: build/icon.icns
+  target:
+    - dir
+    - dmg
+  identity: null # D57: 不做签名公证，本机右键打开放行
+  artifactName: ${productName}-${version}-${arch}.${ext}
+asar: true
+npmRebuild: true # 打包时按 Electron ABI 重编 better-sqlite3 原生模块
+extraResources:
+  # MinerU sidecar 源码（uv.lock 锁定，D57/D72）；不含 .venv——venv 首启装在数据目录
+  - from: sidecar/mineru
+    to: sidecar/mineru
+    filter:
+      - '**/*'
+      - '!**/.venv/**'
+      - '!**/__pycache__/**'

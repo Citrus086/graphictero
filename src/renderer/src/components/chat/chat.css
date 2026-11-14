@@ -1,0 +1,141 @@
+/*
+ * M5 lane/chat 车道样式（对话抽屉 / 会话下拉 / 消息列表 / 读取记录行，D30/D8）。
+ * 批 1：抽屉骨架 + 流式消息 + data-trace。styles.css 车道期间冻结，样式全部写在这里；
+ * 颜色走现有主题变量（深浅色跟随）。
+ */
+
+/* 抽屉：App 级宿主挂载（.appwin 的 flex 子项），与 sidebar/maincol 并列。
+   z-index 61：07 阅读器 modal（.gt-reader-mask z-60）之上、选区弹层（z-70）之下 */
+.gt-chat-drawer{flex:none;position:relative;z-index:61;display:flex;flex-direction:column;min-height:0;height:100%;background:var(--side);border-left:1px solid var(--line)}
+
+/* 左侧拖柄（300–560px，D30） */
+.gt-chat-rz{position:absolute;left:-3px;top:0;bottom:0;width:6px;cursor:col-resize;z-index:5;touch-action:none}
+.gt-chat-rz:hover{background:var(--sel)}
+
+/* 顶栏：会话下拉 + 新建 + 收起 */
+.gt-chat-head{display:flex;align-items:center;gap:4px;padding:8px 10px 4px;flex:none}
+.gt-sess{position:relative}
+.gt-sess-btn{display:flex;align-items:center;gap:6px;max-width:180px;padding:4px 8px;border-radius:6px;font-size:13px;font-weight:500;color:var(--text);background:transparent;border:none;cursor:pointer}
+.gt-sess-btn:hover{background:var(--hover)}
+.gt-sess-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt-sess-menu{position:absolute;z-index:30;min-width:230px;margin-top:4px}
+.gt-sess-on{background:var(--sel)}
+.gt-sess-item-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt-sess-edit input{width:100%;font-size:12.5px;padding:3px 6px;border:1px solid var(--accent);border-radius:5px;background:var(--bg);color:var(--text);outline:none}
+
+/* 入口对象行（原型 dsub） */
+.gt-chat-entry{display:flex;align-items:center;gap:6px;padding:2px 12px 8px;font-size:12px;color:var(--text2);border-bottom:1px solid var(--line);flex:none}
+.gt-chat-entry b{color:var(--text);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* 消息流 */
+.gt-chat-msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:12px}
+.gt-chat-empty{margin:auto;text-align:center;font-size:12.5px;color:var(--text3);line-height:20px;padding:18px 8px}
+.gt-msg{display:flex;flex-direction:column}
+.gt-msg-user{align-items:flex-end}
+/* uat5 D172：系统记录（撤销通知等）——居中灰行，不作用户消息 */
+.gt-msg-system{align-self:center;font-size:11px;color:var(--text3);background:var(--canvas);border-radius:8px;padding:2px 8px;margin:2px 0}
+.gt-bubble{max-width:88%;padding:7px 11px;border-radius:10px;background:var(--sel);color:var(--text);font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.gt-msg-ai .gt-parts{max-width:100%}
+.gt-msg-error{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12px;color:var(--danger)}
+.gt-msg-error .btn{color:var(--danger);border-color:var(--danger);height:24px;font-size:11px}
+.gt-typing{font-size:12px;color:var(--text3)}
+
+/* data-trace：灰色读取记录行（D8），可展开 excerpt */
+.gt-part-trace{border:1px solid var(--line);border-radius:6px;background:var(--side)}
+.gt-trace-head{display:flex;align-items:center;gap:6px;width:100%;padding:5px 9px;font-size:12px;color:var(--text2);text-align:left;background:transparent;border:none;cursor:pointer}
+.gt-trace-head:hover:not(:disabled){background:var(--hover)}
+.gt-trace-head:disabled{cursor:default}
+.gt-trace-tool{flex:none;font-size:10.5px;color:var(--text3);border:1px solid var(--line2);border-radius:4px;padding:0 4px}
+.gt-trace-summary{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt-trace-toggle{flex:none;font-size:11px;color:var(--text3)}
+.gt-trace-excerpt{margin:0;padding:6px 10px 8px 30px;font-size:12px;color:var(--text2);border-top:1px solid var(--line);white-space:pre-wrap;font-family:inherit}
+
+/* 输入区（composer：chip 区 + @ 按钮 + 输入 + 发送）+ 费用行 */
+.gt-chat-composer{flex:none;position:relative;border-top:1px solid var(--line);margin-top:4px}
+.gt-chat-inputrow{display:flex;align-items:flex-end;gap:6px;padding:6px 12px 4px;flex:none}
+.gt-chat-at{position:static;flex:none;padding-bottom:1px}
+.gt-at-menu{position:absolute;z-index:30;left:12px;right:12px;min-width:0;max-width:calc(100% - 24px);max-height:260px;overflow-y:auto;overflow-x:hidden;margin-bottom:4px}
+.gt-at-menu .mi{min-width:0}
+.gt-at-menu .gt-sess-item-name{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt-chat-input{flex:1;min-height:44px;max-height:140px;resize:none;font-size:13px;line-height:1.5}
+.gt-chat-send,.gt-chat-stop{flex:none;height:32px}
+.gt-chat-cost{display:flex;align-items:center;padding:2px 12px 8px;font-size:11px;color:var(--text3);flex:none}
+.gt-chat-model{border:1px solid var(--line2);border-radius:4px;padding:0 4px;font-size:10.5px;color:var(--text3)}
+.gt-chat-drawer.gt-chat-drop-active{box-shadow:inset 3px 0 0 var(--accent)}
+.gt-chat-drop-active .gt-chips{background:var(--sel);box-shadow:inset 0 0 0 1px var(--accent);border-radius:8px}
+
+/* D176 子图：未选节点 opacity .15、未选边 .08，均不可交互；冻结集满不透明 */
+.react-flow__node.gt-sub-dim{opacity:.15;pointer-events:none}
+.react-flow__edge.gt-sub-dim{opacity:.08;pointer-events:none}
+.react-flow__node.gt-sub-hi,.react-flow__edge.gt-sub-hi{opacity:1}
+/* uat7b D184-②：子图里已选节点的强调色圈始终可见（xyflow 的 selected 包装层
+   把 box-shadow 重置为 none，这里在子图高亮态下显式保住 .pnode.sel 的描边）。 */
+.react-flow__node.gt-sub-hi .pnode.sel{box-shadow:0 0 0 2px var(--accent),0 2px 8px rgba(47,111,235,.12)}
+.gt-subgraph-banner{position:absolute;z-index:20;top:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;max-width:calc(100% - 24px);padding:5px 8px 5px 12px;border:1px solid var(--line2);border-radius:8px;background:var(--panel);box-shadow:var(--pop);font-size:12px;color:var(--text2);white-space:nowrap}
+
+/* 上下文 chip（D30：quote / 论文） */
+.gt-chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px 2px}
+.gt-chip{display:inline-flex;align-items:center;gap:4px;max-width:220px;padding:2px 6px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);font-size:11.5px;color:var(--text2)}
+.gt-chip-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt-chip-x{display:inline-flex;align-items:center;border:none;background:transparent;color:var(--text3);cursor:pointer;padding:0}
+.gt-chip-x:hover{color:var(--text)}
+/* uat3b 必须修 3：引文 chip 字数徽标 + 展开态 */
+.gt-chip-n{display:inline-flex;align-items:center;border:none;background:transparent;color:var(--text3);cursor:pointer;padding:0 2px;font-size:10.5px;font-variant-numeric:tabular-nums;border-left:1px solid var(--line2)}
+.gt-chip-n:hover{color:var(--accent)}
+.gt-chip-expanded{max-width:100%;align-items:flex-start}
+.gt-chip-expanded .gt-chip-label{white-space:pre-wrap;word-break:break-word}
+
+/* 「正在思考…」三点动画（原型） */
+.gt-typing{display:flex;align-items:center;gap:2px;font-size:12px;color:var(--text3)}
+.gt-dots{display:inline-flex;gap:2px;margin-left:2px}
+.gt-dots i{width:3px;height:3px;border-radius:50%;background:var(--text3);animation:gt-typing-dot 1.2s infinite ease-in-out}
+.gt-dots i:nth-child(2){animation-delay:.2s}
+.gt-dots i:nth-child(3){animation-delay:.4s}
+@keyframes gt-typing-dot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-2px)}}
+
+/* ── M5 lane/chat 批 3：候选卡片 / 改图小结 / 画布候选节点 / flash ── */
+
+/* data-paper-card：候选论文卡片（D32/D117） */
+.gt-part-card{display:flex;flex-direction:column;gap:5px;max-width:420px;padding:9px 11px;border:1px solid var(--line2);border-radius:8px;background:var(--panel)}
+.gt-part-card[data-status='candidate']{border-style:dashed}
+.gt-part-card[data-status='confirmed']{opacity:.75}
+.gt-part-card[data-status='ignored']{opacity:.55}
+.gt-card-title{display:flex;align-items:center;gap:6px;font-size:13px}
+.gt-card-title b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt-card-intag{flex:none;font-size:10.5px;color:var(--text2);border:1px solid var(--line2);border-radius:4px;padding:0 4px}
+.gt-card-meta{display:flex;flex-wrap:wrap;gap:4px;font-size:11.5px;color:var(--text3)}
+.gt-card-hint{font-size:11px;color:var(--text3)}
+/* uat5 必须修 2 / D168：未核实提示——低调灰阶，同 gt-card-hint 口径 */
+.gt-card-unverified{color:var(--text3);opacity:.85}
+.gt-card-links{display:flex;flex-wrap:wrap;gap:8px}
+.gt-card-link{border:0;background:none;padding:0;font-size:11px;color:var(--text2);cursor:pointer;text-decoration:underline}
+.gt-card-reason{font-size:12px;color:var(--text2);line-height:1.55}
+.gt-card-actions{display:flex;gap:6px}
+.gt-card-done{font-size:11.5px;color:var(--text3)}
+
+/* data-graph-change：改图小结行（D32/D119） */
+.gt-part-gchange{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--side);font-size:12.5px}
+.gt-gchange-tag{flex:none;font-size:10.5px;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:0 4px}
+.gt-gchange-summary{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2)}
+.gt-part-gchange .btn{height:24px;font-size:11px;flex:none}
+
+/* 画布候选虚线节点（D117；样式挂 chat.css，styles.css 冻结） */
+.gt-cand{width:200px;padding:8px 10px;border:1.5px dashed var(--text3);border-radius:8px;background:var(--panel);box-shadow:var(--shadow)}
+.gt-cand-tag{font-size:10.5px;color:var(--text3);margin-bottom:2px}
+.gt-cand-t{font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt-cand-reason{font-size:11px;color:var(--text2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px}
+.gt-cand-m{font-size:11px;color:var(--text3);margin-top:2px}
+.gt-cand-in{color:var(--accent)}
+.gt-cand-acts{display:flex;gap:6px;margin-top:6px}
+.gt-cand-acts .btn{height:22px;font-size:11px}
+.legend .sw.c{display:inline-block;width:18px;height:0;border-top:2px dashed var(--text3)}
+
+/* 「定位」flash：节点/边 1.5s 脉冲（React Flow 容器上的 className） */
+.react-flow__node.gt-flash{animation:gt-flash-pulse 1.5s ease-in-out}
+.react-flow__edge.gt-flash path.react-flow__edge-path{animation:gt-flash-stroke 1.5s ease-in-out}
+@keyframes gt-flash-pulse{0%,100%{box-shadow:none}25%{box-shadow:0 0 0 4px var(--sel)}60%{box-shadow:0 0 0 2px var(--sel)}}
+@keyframes gt-flash-stroke{0%,100%{stroke:var(--edge)}25%{stroke:var(--accent);stroke-width:2.5}60%{stroke:var(--accent)}}
+
+/* chip 空态拖放目标（评审建 2） */
+.gt-chips-empty{border:1px dashed var(--line2);border-radius:8px;margin:8px 12px 2px;padding:5px 8px}
+.gt-chips-hint{font-size:11px;color:var(--text3)}

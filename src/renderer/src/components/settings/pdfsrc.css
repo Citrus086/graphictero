@@ -1,0 +1,157 @@
+/* M6 lane/ui 批 1 补充样式（M6 约定：lane/ui 新样式只进本文件与 export.css，不改 styles.css） */
+
+/* ── 设置 › PDF 来源（原型 05 srcrow 口径） ── */
+.srcrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px;
+  border-radius: 7px;
+}
+.srcrow:hover {
+  background: var(--line2);
+}
+.srcrow.dragging {
+  opacity: 0.5;
+}
+.srcrow .hdl {
+  width: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: grab;
+  color: var(--text3);
+  flex: none;
+}
+.srcrow .hdl i {
+  display: block;
+  width: 10px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.srcrow .no {
+  width: 16px;
+  font-size: 11px;
+  color: var(--text3);
+  text-align: right;
+  flex: none;
+}
+.srcrow .srcinfo {
+  flex: 1;
+  min-width: 0;
+}
+.srcrow .nm {
+  font-size: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.srcrow .nm .off {
+  margin-left: 6px;
+  font-size: 10.5px;
+  color: var(--text3);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.srcrow .ds {
+  font-size: 11px;
+  color: var(--text3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.srcfoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 6px;
+  flex-wrap: wrap;
+}
+.srcadd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+}
+.srcerr {
+  flex: 1 1 100%;
+  font-size: 11.5px;
+  color: var(--danger);
+}
+.later {
+  margin: 14px 4px 0;
+  font-size: 11.5px;
+  color: var(--text3);
+}
+
+/* 开关（.psw）：原型 05 .sw 口径 */
+.psw {
+  width: 30px;
+  height: 17px;
+  border-radius: 9px;
+  background: var(--line2);
+  border: none;
+  position: relative;
+  cursor: pointer;
+  flex: none;
+  padding: 0;
+}
+.psw i {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--text3);
+  transition: left 0.12s ease, background 0.12s ease;
+}
+.psw.on {
+  background: var(--accent);
+}
+.psw.on i {
+  left: 15px;
+  background: var(--accentText);
+}
+
+/* ── 03e（PaperDetailPage noPdfView 实装后的态；覆盖 lane/detail 占位态样式） ── */
+.gt-pd-dropz {
+  cursor: default;
+  opacity: 1;
+}
+.gt-pd-dropz.over {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── 候选四态（对话卡片 PaperCardBlock / 画布 CandidateNode 共用） ── */
+.gt-card-prog,
+.gt-cand-prog {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--text3);
+}
+.gt-card-warn {
+  font-size: 11.5px;
+  color: var(--danger);
+}
+.gt-card-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.gt-part-card .gt-card-title b.gt-card-jump {
+  cursor: pointer;
+}
+.gt-part-card .gt-card-title b.gt-card-jump:hover {
+  color: var(--accent);
+}
+.gt-cand-prog {
+  margin-top: 4px;
+}
